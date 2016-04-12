@@ -3,9 +3,9 @@ using System.Collections;
 
 public class movement : MonoBehaviour {
 
-	public float speed = 50f;
-	public float jump = 175f;
-	public float maxSpeed = 1;
+	public float speed = 500f;
+	public float jump = 1750f;
+	public float maxSpeed = 10;
 	public bool ground;
 	private Rigidbody2D RB2;
 	// Use this for initialization

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class test2 : MonoBehaviour {
+using UnityEngine.SceneManagement;
+public class death : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,4 +12,8 @@ public class test2 : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	void OnTriggerEnter2D(Collider2D colider){
+		SceneManager.LoadScene ("game_over");
+	} 
 }
