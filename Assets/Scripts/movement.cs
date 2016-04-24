@@ -8,9 +8,14 @@ public class movement : MonoBehaviour {
 	public float maxSpeed = 10;
 	public bool ground;
 	private Rigidbody2D RB2;
-	// Use this for initialization
+    private bool facingRight;
+    private Animator myAnimator;
+	
+    // Use this for initialization
 	void Start () {
 		RB2 = gameObject.GetComponent<Rigidbody2D> ();
+        facingRight = true;
+        myAnimator = GetComponent<Animator>();
 	}
 
 	// Update is called once per frame
@@ -32,6 +37,20 @@ public class movement : MonoBehaviour {
 			RB2.velocity = new Vector2 (-maxSpeed, RB2.velocity.y);
 		}
 
+        Flip(move);
+        myAnimator.SetFloat("speed", Mathf.Abs(move));
 
-	}
+    }
+    
+
+    private void Flip(float horizontal)
+    {
+        if(horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+        {
+            facingRight = !facingRight;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
+    }
 }
