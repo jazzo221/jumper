@@ -8,14 +8,14 @@ public class grounded : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		mov = gameObject.GetComponentInParent<movement> ();
+		//mov = gameObject.GetComponentInParent<movement> ();
 	}
 
 	void OnTriggerEnter2D(Collider2D colider){
-		mov.ground = true;
+		//mov.ground = true;
 	} 
 
 	void OnTriggerExit2D(Collider2D colider){
-		mov.ground = false;
+		//mov.ground = false;
 	} 
 }

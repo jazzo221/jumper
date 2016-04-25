@@ -6,21 +6,23 @@ public class movement : MonoBehaviour {
 	public float speed = 500f;
 	public float jump = 1750f;
 	public float maxSpeed = 10;
-	public bool ground;
+	//public bool ground;
 	private Rigidbody2D RB2;
     private bool facingRight;
     private Animator myAnimator;
+    private float distToGround;
 	
     // Use this for initialization
 	void Start () {
 		RB2 = gameObject.GetComponent<Rigidbody2D> ();
         facingRight = true;
         myAnimator = GetComponent<Animator>();
-	}
+        distToGround = GetComponent<Collider2D>().bounds.extents.y;
+    }
 
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetButtonDown("Jump")&& ground){
+		if(Input.GetButtonDown("Jump")&& isGrounded()){
 			RB2.AddForce(Vector2.up * jump);
 		}
 	}
@@ -52,5 +54,15 @@ public class movement : MonoBehaviour {
             theScale.x *= -1;
             transform.localScale = theScale;
         }
+    }
+
+    private bool isGrounded() {
+
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        collider.enabled = false;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position,Vector2.down,distToGround + 0.1f);
+        collider.enabled = true;
+
+        return hit.collider && hit.collider.tag == "Floor";
     }
 }
